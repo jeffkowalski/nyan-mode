@@ -1,19 +1,19 @@
 ;;; nyan-mode.el --- Nyan Cat shows position in current buffer in mode-line.
-;;;
-;;; Nyanyanyanyanyanyanya!
-;;; 
-;;; Author: Jacek "TeMPOraL" Zlydach <temporal.pl@gmail.com>
-;;; URL: http://nyan-mode.buildsomethingamazing.com
-;;; Keywords: nyan, cat, lulz, pop tart cat, build something amazing
-;;; 
-;;; Inspired by (and in few places copied from) sml-modeline.el,
-;;; written by Lennart Borgman
-;;; See: http://bazaar.launchpad.net/~nxhtml/nxhtml/main/annotate/head%3A/util/sml-modeline.el
+
+;; Author: Jacek "TeMPOraL" Zlydach <temporal.pl@gmail.com>
+;; URL: http://nyan-mode.buildsomethingamazing.com
+;; Keywords: nyan, cat, lulz, pop tart cat, build something amazing
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; LICENSE
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Commentary:
+;; Nyanyanyanyanyanyanya!
+;; 
+;; Inspired by (and in few places copied from) sml-modeline.el,
+;; written by Lennart Borgman
+;; See: http://bazaar.launchpad.net/~nxhtml/nxhtml/main/annotate/head%3A/util/sml-modeline.el
+
+
+;; LICENSE: 
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
@@ -30,13 +30,15 @@
 ;; the Free Software Foundation, Inc., 51 Franklin Street, Fifth
 ;; Floor, Boston, MA 02110-1301, USA.
 ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Some TODOs
-;;; * Investigate why wavy rainbow didn't work on Antoszka's computer.
-;;; * Refactor-out :set lambdas in customs if possible.
-;;; * MAYBE add something to protect users from going to 0 with nyanbar width?
-;;; * Add credits for used images.
+
+;;; Todo: 
+;; * Investigate why wavy rainbow didn't work on Antoszka's computer.
+;; * Refactor-out :set lambdas in customs if possible.
+;; * MAYBE add something to protect users from going to 0 with nyanbar width?
+;; * Add credits for used images.
+
+;;; Code: 
 (defgroup nyan nil
   "Customization group for `nyan-mode'."
   :group 'frames)
@@ -180,3 +182,5 @@ option `scroll-bar-mode'."
 
 
 (provide 'nyan-mode)
+
+;;; nyan-mode.el ends here.
