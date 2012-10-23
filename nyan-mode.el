@@ -73,6 +73,15 @@
     (setq nyan-animation-timer nil)
     (setq nyan-animate-nyancat nil)))
 
+;; mplayer needs to be installed for that
+(defun nyan-start-music ()
+  (interactive)
+  (start-process-shell-command "nyan-music" "nyan-music" (concat "mplayer " +nyan-music+ " -loop 0")))
+
+(defun nyan-stop-music ()
+  (interactive)
+  (kill-process "nyan-music"))
+
 
 ;;; FIXME bug, doesn't work for antoszka.
 (defcustom nyan-wavy-trail nil
@@ -111,6 +120,7 @@ This can be t or nil."
 (defconst +nyan-cat-size+ 3)
 
 (defconst +nyan-cat-image+ (concat +nyan-directory+ "img/nyan.xpm"))
+(defconst +nyan-music+ (concat +nyan-directory+ "mus/nyanlooped.mp3"))
 (defconst +nyan-rainbow-image+ (concat +nyan-directory+ "img/rainbow.xpm"))
 (defconst +nyan-outerspace-image+ (concat +nyan-directory+ "img/outerspace.xpm"))
 
