@@ -1,19 +1,19 @@
 ;;; nyan-mode.el --- Nyan Cat shows position in current buffer in mode-line.
+;;;
+;;; Nyanyanyanyanyanyanya!
+;;;
+;;; Author: Jacek "TeMPOraL" Zlydach <temporal.pl@gmail.com>
+;;; URL: http://nyan-mode.buildsomethingamazing.com
+;;; Version: 0.2
+;;; Keywords: nyan, cat, lulz, pop tart cat, build something amazing
+;;;
+;;; Inspired by (and in few places copied from) sml-modeline.el,
+;;; written by Lennart Borgman
+;;; See: http://bazaar.launchpad.net/~nxhtml/nxhtml/main/annotate/head%3A/util/sml-modeline.el
 
-;; Author: Jacek "TeMPOraL" Zlydach <temporal.pl@gmail.com>
-;; URL: http://nyan-mode.buildsomethingamazing.com
-;; Keywords: nyan, cat, lulz, pop tart cat, build something amazing
-
-
-;;; Commentary:
-;; Nyanyanyanyanyanyanya!
-;;
-;; Inspired by (and in few places copied from) sml-modeline.el,
-;; written by Lennart Borgman
-;; See: http://bazaar.launchpad.net/~nxhtml/nxhtml/main/annotate/head%3A/util/sml-modeline.el
-
-
-;; LICENSE:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; LICENSE
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
