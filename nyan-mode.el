@@ -131,6 +131,8 @@ This can be t or nil."
 (defconst +nyan-rainbow-image+ (concat +nyan-directory+ "img/rainbow.xpm"))
 (defconst +nyan-outerspace-image+ (concat +nyan-directory+ "img/outerspace.xpm"))
 
+(defconst +nyan-music+ (concat +nyan-directory+ "mus/nyanlooped.mp3"))
+
 ;;; Load images of Nyan Cat an it's rainbow.
 (defvar nyan-cat-image (create-image +nyan-cat-image+ 'xpm nil :ascent 'center))
 
