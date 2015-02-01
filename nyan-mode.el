@@ -57,23 +57,23 @@
   :group 'nyan)
 
 (defvar nyan-animation-timer nil)
+(defvar nyan-animation-loop-count 0)
+(defvar nyan-animation-loop-max 1)
 
 (defun nyan-start-animation ()
   (interactive)
-  (when (not (and nyan-animate-nyancat
-		  nyan-animation-timer))
-    (setq nyan-animation-timer (run-at-time "1 sec"
-                                            nyan-animation-frame-interval
-                                            'nyan-swich-anim-frame))
-    (setq nyan-animate-nyancat t)))
+  (when (not nyan-animation-timer)
+    (setq nyan-animation-timer
+          (run-at-time "0 sec"
+                       nyan-animation-frame-interval
+                       'nyan-swich-anim-frame)
+          nyan-animation-loop-count 0)))
 
 (defun nyan-stop-animation ()
   (interactive)
-  (when (and nyan-animate-nyancat
-	     nyan-animation-timer)
+  (when nyan-animation-timer
     (cancel-timer nyan-animation-timer)
-    (setq nyan-animation-timer nil)
-    (setq nyan-animate-nyancat nil)))
+    (setq nyan-animation-timer nil)))
 
 ;; mplayer needs to be installed for that
 (defun nyan-start-music ()
@@ -124,18 +124,24 @@ This can be t or nil."
 (defconst +nyan-cat-size+ 3)
 
 (defconst +nyan-cat-image+ (concat +nyan-directory+ "img/nyan.xpm"))
+(defconst +nyan-cat-start-image+ (concat +nyan-directory+ "img/nyan-start.xpm"))
 (defconst +nyan-rainbow-image+ (concat +nyan-directory+ "img/rainbow.xpm"))
+(defconst +nyan-rainbow-start-image+ (concat +nyan-directory+ "img/rainbow-start.xpm"))
 (defconst +nyan-outerspace-image+ (concat +nyan-directory+ "img/outerspace.xpm"))
 
 (defconst +nyan-music+ (concat +nyan-directory+ "mus/nyanlooped.mp3"))
 
 ;;; Load images of Nyan Cat an it's rainbow.
 (defvar nyan-cat-image (create-image +nyan-cat-image+ 'xpm nil :ascent 'center))
+(defvar nyan-cat-start-image (create-image +nyan-cat-start-image+ 'xpm nil :ascent 'center))
 
 (defvar nyan-animation-frames (mapcar (lambda (id)
                                         (create-image (concat +nyan-directory+ (format "img/nyan-frame-%d.xpm" id))
-                                                      'xpm nil :ascent 95))
+                                                      'xpm nil :ascent 'center))
                                       '(1 2 3 4 5 6)))
+
+(defvar nyan-last-rainbow-count 0)
+
 (defvar nyan-current-frame 0)
 
 (defconst +catface+ [
@@ -151,21 +157,25 @@ This can be t or nil."
          "(　　＞三ワ＜　)" "(　＞ワ三＜　　)"]])
 
 (defun nyan-swich-anim-frame ()
+(when (> nyan-animation-loop-count nyan-animation-loop-max)
+    (nyan-stop-animation))
   (setq nyan-current-frame (% (+ 1 nyan-current-frame) 6))
+  (when (equal nyan-current-frame 5)
+    (setq nyan-animation-loop-count (1+ nyan-animation-loop-count)))
   (redraw-modeline))
 
-(defun nyan-get-anim-frame ()
-  (if nyan-animate-nyancat
+(defun nyan-get-anim-frame (rainbows &optional start)
+  (if (and nyan-animation-timer (> rainbows 0))
       (nth nyan-current-frame nyan-animation-frames)
-    nyan-cat-image))
+    (if start nyan-cat-start-image nyan-cat-image)))
 
 (defun nyan-wavy-rainbow-ascent (number)
-  (if nyan-animate-nyancat
-      (min 100 (+ 90
+  (if nyan-animation-timer
+      (min 100 (+ 81
                   (* 3 (abs (- (/ 6 2)
                                (% (+ number nyan-current-frame)
                                   6))))))
-      (if (zerop (% number 2)) 80 'center)))
+    (if (< (% number 6) 3) 90 'center)))
 
 (defun nyan-number-of-rainbows ()
   (round (/ (* (round (* 100
@@ -189,21 +199,40 @@ This can be t or nil."
   (let* ((rainbows (nyan-number-of-rainbows))
          (outerspaces (- nyan-bar-length rainbows +nyan-cat-size+))
          (rainbow-string "")
+         (rainbow-start t)
          (nyancat-string (propertize
                           (aref (catface) (catface-index))
-                          'display (nyan-get-anim-frame)))
+                          'display (nyan-get-anim-frame rainbows (eq rainbows 0))))
          (outerspace-string ""))
-    (dotimes (number rainbows)
-      (setq rainbow-string (concat rainbow-string
-                                   (propertize "|"
-                                               'display (create-image +nyan-rainbow-image+ 'xpm nil :ascent (or (and nyan-wavy-trail
 
-                                                                                                                     (nyan-wavy-rainbow-ascent number))
-                                                                                                                (if nyan-animate-nyancat 95 'center)))))))
+    (if (and nyan-animate-nyancat
+             (not (equal nyan-last-rainbow-count rainbows)))
+        (nyan-start-animation))
+    (setq nyan-last-rainbow-count rainbows)
+
+    (dotimes (number rainbows)
+      (setq rainbow-string
+            (concat rainbow-string
+                    (propertize
+                     "|"
+                     'display (create-image (if rainbow-start +nyan-rainbow-start-image+
+                                              +nyan-rainbow-image+)
+                                            'xpm nil
+                                            :ascent
+                                            (if (and nyan-wavy-trail
+                                                     (or (not nyan-animate-nyancat)
+                                                         (and nyan-animate-nyancat nyan-animation-timer)))
+                                                (nyan-wavy-rainbow-ascent number)
+                                              'center)))))
+      (setq rainbow-start nil)
+      )
     (dotimes (number outerspaces)
-      (setq outerspace-string (concat outerspace-string
-                                      (propertize "-"
-                                                  'display (create-image +nyan-outerspace-image+ 'xpm nil :ascent (if nyan-animate-nyancat 95 'center))))))
+      (setq outerspace-string
+            (concat outerspace-string
+                    (propertize
+                     "-"
+                     'display (create-image +nyan-outerspace-image+
+                                            'xpm nil :ascent (if nyan-animation-timer 95 'center))))))
     ;; Compute Nyan Cat string.
     (concat rainbow-string
             nyancat-string
