@@ -85,7 +85,7 @@
 ;; mplayer needs to be installed for that
 (defun nyan-start-music ()
   (interactive)
-  (start-process-shell-command "nyan-music" "nyan-music" (concat "mplayer " +nyan-music+ " -loop 0")))
+  (start-process-shell-command "nyan-music" nil (concat "mplayer " +nyan-music+ " -loop 0")))
  
 (defun nyan-stop-music ()
   (interactive)
