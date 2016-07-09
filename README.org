@@ -1,6 +1,5 @@
 * Nyan Mode - Turn your Emacs into Nyanmacs! :)
 
-** Introduction
 [[https://github.com/TeMPOraL/nyan-mode][file:https://badge.fury.io/gh/TeMPOraL%2Fnyan-mode.svg]]
 [[http://www.nyan.cat/][file:https://img.shields.io/badge/nyan-nyan-ff00ff.svg]]
 [[https://stable.melpa.org/#/nyan-mode][file:https://stable.melpa.org/packages/nyan-mode-badge.svg]]
@@ -9,7 +8,13 @@
 
  *WARNING, MIND DUMBING CONTENT INSIDE.*
 
+#+BEGIN_QUOTE
 "Nyan-mode. It's things like this that make me proud to be an emacs user." - [[http://twitter.com/#!/mitchellh/status/104931263479156736][mitchellh]]
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+"Everything that's wrong (or right) with Emacs." - [[https://youtu.be/NBArWrn6FnY?t=756][wasamasa]]
+#+END_QUOTE
 
 Nyanmacs is expanding!! [[http://temporal.pr0.pl/devblog/2011/08/25/introducing-nyan-mode-el-turn-your-emacs-into-nyanmacs/][Read the story so far]]! :).
 
@@ -20,11 +25,24 @@ Cat should go from left to right in your mode-line, as you move your
 point from 0% to 100%.
 
 ** Features
-  - Mind dumbing content included,
-  - Experimental animation (M-x nyan-start-animation, M-x nyan-stop-animation),
-  - Wavy rainbow (M-x set-variable <ret> nyan-wavy-trail <ret> t),
-  - Music, mplayer is needed (M-x nyan-start-music, M-x nyan-stop-music),
-  - Customizable properties.
+   - *NEW!* You can scroll the buffer by clicking in the Nyan Cat area!
+   - *NEW!* You can customize the minimum window width below which Nyan Mode will be disabled.
+   - Mind dumbing content included,
+   - Animation (=M-x nyan-start-animation=, =M-x nyan-stop-animation=),
+   - Wavy rainbow (=M-x nyan-toggle-wavy-trail=),
+   - Music, mplayer is needed (=M-x nyan-start-music=, =M-x nyan-stop-music=) (thanks, George Leontiev!),
+   - Customizable properties.
+
+** Customizations
+   - =nyan-animate-nyancat= - =t= to have it animated, =nil= for a static version.
+   - =nyan-animation-frame-interval= - number of seconds between animation frames. Accepts fractional values.
+   - =nyan-bar-length= - length of nyan-mode bar, in 8px-wide units.
+   - =nyan-cat-face-number= - choose a cat face for the console mode.
+   - =nyan-wavy-trail= - =t= to make the trail wavy; works even better when animation is enabled!
+   - =nyan-minimum-window-width= - minimum width of the window, below
+     which Nyan Mode will be disabled. This is important because Nyan
+     Mode will otherwise push out more relevant information from the
+     modeline.
 
 ** Fork modifications
 - the starting nyan cat image has no rainbow behind it,
@@ -57,12 +75,13 @@ There was a problem with displaying PNG images, which require libpng
 to be available for Emacs. The lib is sometimes missing (e.g. some
 Windows installation). To make it work on Windows, one needs to
 download a proper DLL and put it into emacs bin/ folder. To see which
-DLL is needed, do: M-x describe-variable <ret> image-library-alist
-<ret>.
+DLL is needed, do: =M-x describe-variable <ret> image-library-alist <ret>=.
 
-Customizing nyan-animate-nyancat is broken; don't do it.
++Customizing nyan-animate-nyancat is broken; don't do it.+
+I think it works now; please report issues if there are problems with it.
 
 ** Credits
+Thanks to everyone contributing patches, bug repots and ideas! The Emacs world is forever in your debt!
 
 Code and idea inspired by sml-modeline.el, written by Lennart Borgman.
 See: http://bazaar.launchpad.net/~nxhtml/nxhtml/main/annotate/head%3A/util/sml-modeline.el
@@ -85,5 +104,8 @@ If you've seen others in the wild, please submit.
 ** Related
 
 Check out Aaron Miller's [[https://github.com/aaron-em/weatherline-mode.el][weatherline.el]], partially inspired by Nyan Mode.
+
+Also check out [[https://github.com/wasamasa/zone-nyan][zone-nyan]] by Vasilij Schneidermann if you want the Nyan
+Cat to visit your Emacs when you step away from the keyboard!
 
 Nyanyanyanyanyanyanya! ♬ ♫ ♪ ♩
