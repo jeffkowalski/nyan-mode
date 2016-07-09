@@ -132,13 +132,13 @@ This can be t or nil."
 (defconst +nyan-cat-size+ 3)
 
 (defconst +nyan-cat-image+ (concat +nyan-directory+ "img/nyan.xpm"))
-(defconst +nyan-music+ (concat +nyan-directory+ "mus/nyanlooped.mp3"))
-(defconst +nyan-cat-start-image+ (concat +nyan-directory+ "img/nyan-start.xpm"))
 (defconst +nyan-rainbow-image+ (concat +nyan-directory+ "img/rainbow.xpm"))
-(defconst +nyan-rainbow-start-image+ (concat +nyan-directory+ "img/rainbow-start.xpm"))
 (defconst +nyan-outerspace-image+ (concat +nyan-directory+ "img/outerspace.xpm"))
 
 (defconst +nyan-music+ (concat +nyan-directory+ "mus/nyanlooped.mp3"))
+
+(defconst +nyan-cat-start-image+ (concat +nyan-directory+ "img/nyan-start.xpm"))
+(defconst +nyan-rainbow-start-image+ (concat +nyan-directory+ "img/rainbow-start.xpm"))
 
 ;;; Load images of Nyan Cat an it's rainbow.
 (defvar nyan-cat-image (if (image-type-available-p 'xpm)
@@ -166,6 +166,7 @@ This can be t or nil."
                           ["(＞ワ＜三　　　)" "(　＞ワ三＜　　)"
                            "(　　＞三ワ＜　)" "(　　　三＞ワ＜)"
                            "(　　＞三ワ＜　)" "(　＞ワ三＜　　)"]])
+
 
 (defun nyan-swich-anim-frame ()
   (when (> nyan-animation-loop-count nyan-animation-loop-max)
@@ -275,4 +276,5 @@ option `scroll-bar-mode'."
 
 
 (provide 'nyan-mode)
+
 ;;; nyan-mode.el ends here
