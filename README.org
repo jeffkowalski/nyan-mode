@@ -42,6 +42,7 @@ point from 0% to 100%.
    - =nyan-minimum-window-width= - minimum width of the window, below
      which Nyan Mode will be disabled. This is important because Nyan
      Mode will otherwise push out more relevant information from the
+     modeline.
 
 ** Fork modifications
 - the starting nyan cat image has no rainbow behind it,
