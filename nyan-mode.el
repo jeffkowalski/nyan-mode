@@ -142,30 +142,30 @@ This can be t or nil."
 
 ;;; Load images of Nyan Cat an it's rainbow.
 (defvar nyan-cat-image (if (image-type-available-p 'xpm)
-                         (create-image +nyan-cat-image+ 'xpm nil :ascent 'center)))
+                           (create-image +nyan-cat-image+ 'xpm nil :ascent 'center)))
 (defvar nyan-cat-start-image (create-image +nyan-cat-start-image+ 'xpm nil :ascent 'center))
 
 (defvar nyan-animation-frames (if (image-type-available-p 'xpm)
-                                (mapcar (lambda (id)
-                                          (create-image (concat +nyan-directory+ (format "img/nyan-frame-%d.xpm" id))
-                                                        'xpm nil :ascent 95))
-                                                        '(1 2 3 4 5 6))))
+                                  (mapcar (lambda (id)
+                                            (create-image (concat +nyan-directory+ (format "img/nyan-frame-%d.xpm" id))
+                                                          'xpm nil :ascent 95))
+                                          '(1 2 3 4 5 6))))
 
 (defvar nyan-last-rainbow-count 0)
 
 (defvar nyan-current-frame 0)
 
 (defconst +nyan-catface+ [
-        ["[]*" "[]#"]
-        ["(*^ｰﾟ)" "( ^ｰ^)" "(^ｰ^ )" "(ﾟｰ^*)"]
-        ["(´ω｀三 )" "( ´ω三｀ )" "( ´三ω｀ )" "( 三´ω｀)"
-         "( 三´ω｀)" "( ´三ω｀ )" "( ´ω三｀ )" "(´ω｀三 )"]
-        ["(´д｀;)" "( ´д`;)" "( ;´д`)" "(;´д` )"]
-        ["(」・ω・)」" "(／・ω・)／" "(」・ω・)」" "(／・ω・)／"
-         "(」・ω・)」" "(／・ω・)／" "(」・ω・)」" "＼(・ω・)／"]
-        ["(＞ワ＜三　　　)" "(　＞ワ三＜　　)"
-         "(　　＞三ワ＜　)" "(　　　三＞ワ＜)"
-         "(　　＞三ワ＜　)" "(　＞ワ三＜　　)"]])
+                          ["[]*" "[]#"]
+                          ["(*^ｰﾟ)" "( ^ｰ^)" "(^ｰ^ )" "(ﾟｰ^*)"]
+                          ["(´ω｀三 )" "( ´ω三｀ )" "( ´三ω｀ )" "( 三´ω｀)"
+                           "( 三´ω｀)" "( ´三ω｀ )" "( ´ω三｀ )" "(´ω｀三 )"]
+                          ["(´д｀;)" "( ´д`;)" "( ;´д`)" "(;´д` )"]
+                          ["(」・ω・)」" "(／・ω・)／" "(」・ω・)」" "(／・ω・)／"
+                           "(」・ω・)」" "(／・ω・)／" "(」・ω・)」" "＼(・ω・)／"]
+                          ["(＞ワ＜三　　　)" "(　＞ワ三＜　　)"
+                           "(　　＞三ワ＜　)" "(　　　三＞ワ＜)"
+                           "(　　＞三ワ＜　)" "(　＞ワ三＜　　)"]])
 
 (defun nyan-swich-anim-frame ()
   (when (> nyan-animation-loop-count nyan-animation-loop-max)
@@ -194,17 +194,17 @@ This can be t or nil."
                                (float (point-min)))
                             (float (point-max)))))
                (- nyan-bar-length +nyan-cat-size+))
-          100)))
+            100)))
 
 (defun nyan-catface () (aref +nyan-catface+ nyan-cat-face-number))
 
 (defun nyan-catface-index ()
   (min (round (/ (* (round (* 100
-                         (/ (- (float (point))
-                               (float (point-min)))
-                            (float (point-max)))))
-                            (length (nyan-catface)))
-                            100)) (- (length (nyan-catface)) 1)))
+                              (/ (- (float (point))
+                                    (float (point-min)))
+                                 (float (point-max)))))
+                    (length (nyan-catface)))
+                 100)) (- (length (nyan-catface)) 1)))
 
 (defun nyan-create ()
   (let* ((rainbows (nyan-number-of-rainbows))
