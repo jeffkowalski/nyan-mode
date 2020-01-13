@@ -95,21 +95,6 @@
 (defvar nyan-animation-loop-count 0)
 (defvar nyan-animation-loop-max 1)
 
-(defun nyan-start-animation ()
-  (interactive)
-  (when (not nyan-animation-timer)
-    (setq nyan-animation-timer
-          (run-at-time "0 sec"
-                       nyan-animation-frame-interval
-                       'nyan-switch-anim-frame)
-          nyan-animation-loop-count 0)))
-
-(defun nyan-stop-animation ()
-  (interactive)
-  (when nyan-animation-timer
-    (cancel-timer nyan-animation-timer)
-    (setq nyan-animation-timer nil)))
-
 (defcustom nyan-music-player "mplayer"
   "Change a music player for NyanCat."
   :type '(choice (const "mplayer")
@@ -171,9 +156,6 @@ This can be t or nil."
                  (const :tag "Disabled" nil))
   :set (lambda (sym val)
          (set-default sym val)
-         (if val
-             (nyan-start-animation)
-           (nyan-stop-animation))
          (nyan-refresh))
   :group 'nyan)
 
@@ -335,9 +317,16 @@ option `scroll-bar-mode'."
   :group 'nyan
   (if nyan-mode
       (progn
+        (when nyan-animate-nyancat
+          (setq nyan-animation-timer (run-at-time "1 sec"
+                                                  nyan-animation-frame-interval
+                                                  'nyan-swich-anim-frame)))
         (unless nyan-old-car-mode-line-position
           (setq nyan-old-car-mode-line-position (car mode-line-position)))
         (setcar mode-line-position '(:eval (list (nyan-create)))))
+    (when nyan-animation-timer
+      (cancel-timer nyan-animation-timer)
+      (setq nyan-animation-timer nil))
     (setcar mode-line-position nyan-old-car-mode-line-position)))
 
 
