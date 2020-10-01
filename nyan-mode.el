@@ -320,7 +320,7 @@ option `scroll-bar-mode'."
         (when nyan-animate-nyancat
           (setq nyan-animation-timer (run-at-time "1 sec"
                                                   nyan-animation-frame-interval
-                                                  'nyan-swich-anim-frame)))
+                                                  'nyan-switch-anim-frame)))
         (unless nyan-old-car-mode-line-position
           (setq nyan-old-car-mode-line-position (car mode-line-position)))
         (setcar mode-line-position '(:eval (list (nyan-create)))))
