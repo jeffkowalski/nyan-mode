@@ -92,8 +92,6 @@
   :group 'nyan)
 
 (defvar nyan-animation-timer nil)
-(defvar nyan-animation-loop-count 0)
-(defvar nyan-animation-loop-max 1)
 
 (defcustom nyan-music-player "mplayer"
   "Change a music player for NyanCat."
@@ -199,11 +197,7 @@ This can be t or nil."
   (setq nyan-wavy-trail (not nyan-wavy-trail)))
 
 (defun nyan-switch-anim-frame ()
-  (when (> nyan-animation-loop-count nyan-animation-loop-max)
-    (nyan-stop-animation))
   (setq nyan-current-frame (% (+ 1 nyan-current-frame) 6))
-  (when (equal nyan-current-frame 5)
-    (setq nyan-animation-loop-count (1+ nyan-animation-loop-count)))
   (redraw-modeline))
 
 (defun nyan-get-anim-frame (rainbows &optional start)
